@@ -56,8 +56,8 @@ func main() {
 	bq := elastic.NewBoolQuery().
 		Must(
 			elastic.NewRangeQuery(fieldTs).From(from),
-			elastic.NewMatchQuery(fieldMessage, message),
-			elastic.NewMatchQuery(fieldHostname, hostname),
+			elastic.NewMatchPhraseQuery(fieldMessage, message),
+			elastic.NewMatchPhraseQuery(fieldHostname, hostname),
 		)
 
 	esSearch := esClient.Search().
