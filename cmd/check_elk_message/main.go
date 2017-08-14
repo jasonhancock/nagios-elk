@@ -49,6 +49,9 @@ func main() {
 	}
 
 	esClient, err := elastic.NewClient(opts...)
+	if err != nil {
+		p.Fatal(err)
+	}
 
 	bq := elastic.NewBoolQuery().
 		Must(
