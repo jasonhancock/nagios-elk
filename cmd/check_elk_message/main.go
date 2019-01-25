@@ -1,11 +1,12 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"flag"
 
-	"github.com/jasonhancock/go-nagios"
-	"gopkg.in/olivere/elastic.v3"
+	nagios "github.com/jasonhancock/go-nagios"
+	elastic "gopkg.in/olivere/elastic.v5"
 )
 
 func main() {
@@ -67,7 +68,8 @@ func main() {
 		Sort(fieldTs, false).
 		Size(pageSize)
 
-	esResults, err := esSearch.Do()
+	ctx := context.Background()
+	esResults, err := esSearch.Do(ctx)
 	if err != nil {
 		p.Fatal(err)
 	}
